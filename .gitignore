@@ -1,0 +1,15 @@
+node_modules/
+.next/
+out/
+coverage/
+.local/
+.env*
+!.env.example
+*.tsbuildinfo
+.DS_Store
+npm-debug.log*
+research/
+.vercel/
+playwright-report/
+test-results/
+.vercel

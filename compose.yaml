@@ -1,0 +1,69 @@
+# Local wallet demo: app and pinned walt.id services share one project.
+name: diw-local
+services:
+  app:
+    build:
+      context: .
+      target: development
+    init: true
+    ports:
+      - "127.0.0.1:${DIW_APP_PORT:-47831}:47831"
+    environment:
+      APP_ORIGIN: "${DIW_APP_ORIGIN:-http://localhost:47831}"
+      DEMO_DATA_DIR: /app/.local
+      NEXT_TELEMETRY_DISABLED: "1"
+      WALT_WALLET_URL: http://wallet:7006
+      WALT_ISSUER_URL: http://issuer:7005
+      WALT_VERIFIER_URL: http://verifier:7004
+    volumes:
+      - coordination:/app/.local
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    pids_limit: 128
+    mem_limit: 1g
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:47831/api/health/live').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      start_period: 60s
+      retries: 3
+  issuer:
+    image: waltid/issuer-api2:1.2.1@sha256:9cb23f2cd34bf73eddcd4b3715553bdb39fc1d1009f77ff11c92082eae41fd83
+    ports: ["127.0.0.1:7005:7005"]
+    volumes:
+      - ./.local/walt-config/issuer:/waltid-issuer-api2/config:ro
+    security_opt: ["no-new-privileges:true"]
+    cap_drop: [ALL]
+    mem_limit: 768m
+    pids_limit: 256
+  wallet:
+    image: waltid/wallet-api2:1.2.1@sha256:7937cfe2450e5521e272615179baef66f805459df391f2321b2f20ad92468614
+    ports: ["127.0.0.1:7006:7006"]
+    volumes:
+      - ./.local/walt-config/wallet:/waltid-wallet-api2/config:ro
+      - wallet-data:/waltid-wallet-api2/data
+    security_opt: ["no-new-privileges:true"]
+    cap_drop: [ALL]
+    mem_limit: 768m
+    pids_limit: 256
+  verifier:
+    image: waltid/verifier-api2:1.2.1@sha256:acd56d414b95c9b47558845060cb34cf138fa6fdae3aeff7e0ac1f1e53c25624
+    ports: ["127.0.0.1:7004:7004"]
+    volumes:
+      - ./.local/walt-config/verifier:/waltid-verifier-api2/config:ro
+    security_opt: ["no-new-privileges:true"]
+    cap_drop: [ALL]
+    mem_limit: 768m
+    pids_limit: 256
+volumes:
+  wallet-data:
+    external: true
+    name: diw-walt_wallet-data
+  coordination:
+
+networks:
+  default:
+    external: true
+    name: diw-walt_default

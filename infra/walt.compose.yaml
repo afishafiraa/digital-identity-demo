@@ -1,0 +1,34 @@
+# Legacy migration/rollback only. Current startup uses root compose.yaml (diw-local).
+# Never run both projects together; they share ports and the persistent wallet data.
+name: diw-walt
+services:
+  issuer:
+    image: waltid/issuer-api2:1.2.1@sha256:9cb23f2cd34bf73eddcd4b3715553bdb39fc1d1009f77ff11c92082eae41fd83
+    ports: ["127.0.0.1:7005:7005"]
+    volumes:
+      - ../.local/walt-config/issuer:/waltid-issuer-api2/config:ro
+    security_opt: ["no-new-privileges:true"]
+    cap_drop: [ALL]
+    mem_limit: 768m
+    pids_limit: 256
+  wallet:
+    image: waltid/wallet-api2:1.2.1@sha256:7937cfe2450e5521e272615179baef66f805459df391f2321b2f20ad92468614
+    ports: ["127.0.0.1:7006:7006"]
+    volumes:
+      - ../.local/walt-config/wallet:/waltid-wallet-api2/config:ro
+      - wallet-data:/waltid-wallet-api2/data
+    security_opt: ["no-new-privileges:true"]
+    cap_drop: [ALL]
+    mem_limit: 768m
+    pids_limit: 256
+  verifier:
+    image: waltid/verifier-api2:1.2.1@sha256:acd56d414b95c9b47558845060cb34cf138fa6fdae3aeff7e0ac1f1e53c25624
+    ports: ["127.0.0.1:7004:7004"]
+    volumes:
+      - ../.local/walt-config/verifier:/waltid-verifier-api2/config:ro
+    security_opt: ["no-new-privileges:true"]
+    cap_drop: [ALL]
+    mem_limit: 768m
+    pids_limit: 256
+volumes:
+  wallet-data:
