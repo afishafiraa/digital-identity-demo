@@ -1,6 +1,6 @@
 # PRD — Identity Wallet Portfolio Project
 
-Version: 1.4 · Updated: 2026-11-09 · Status: F1–F7 implemented locally; integration gate passed; later features pending
+Version: 1.4 · Updated: 2026-11-09 · Status: F1–F7 implemented locally; F9 verified publicly at the owner's request; F8 and full release acceptance pending
 
 ## 1. Purpose
 

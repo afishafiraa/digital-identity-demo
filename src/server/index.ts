@@ -1,4 +1,5 @@
 import 'server-only';
+import { resetHandler } from './core/reset-handler.ts';
 import { presentationHandler } from './core/presentation-handler.ts';
 import { sharingHandler } from './core/sharing-handler.ts';
 import { profileHandler } from './core/profile-handler.ts';
@@ -27,6 +28,10 @@ function runtime(): Runtime {
 export function handleSession(request: Request): Promise<Response> {
   const { config, store } = runtime();
   return sessionHandler(config, store)(request);
+}
+export function handleReset(request: Request): Promise<Response> {
+  const { config, store } = runtime();
+  return resetHandler(config, store)(request);
 }
 export function handleWallet(request: Request): Promise<Response> {
   const { config, store } = runtime();

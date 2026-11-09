@@ -15,7 +15,7 @@ Updated: 2026-11-09. Follow the [PRD](../spec/prd.md), the current [feature guid
 | F6-review-and-approve-sharing | Complete locally; [evidence](F6-review-and-approve-sharing-verification.md) |
 | F7-present-and-show-verifier-result | Complete locally; [evidence](F7-present-and-show-verifier-result-verification.md) |
 | F8-handle-pending-expiry-and-failures | Next: finish shared behavior already applied during each step |
-| F9-reset-current-demo | Pending: safely repeat only the current visitor's scenario |
+| F9-reset-current-demo | Complete at the owner's request; [public reset evidence](F9-reset-current-demo-verification.md) |
 
 ## Keep the work small
 
@@ -31,4 +31,4 @@ Updated: 2026-11-09. Follow the [PRD](../spec/prd.md), the current [feature guid
 - [ ] Keep setup reproducible, keys/data persistent, runtime secrets private and public-demo resource limits small and explicit.
 - [ ] Inspect the VPS, preserve existing services, reuse reverse proxy/HTTPS and verify the demo subdomain.
 
-F1–F7 are implemented and verified locally. F8–F9 and VPS deployment have not been implemented. Detailed historical setup evidence remains available; it is not an active backlog of extra infrastructure work.
+F1–F7 are implemented and verified locally. At the owner’s explicit request, F9 reset was implemented after the temporary Vercel deployment and verified publicly. F8, the VPS deployment and full shared acceptance remain pending. See [F9 evidence](F9-reset-current-demo-verification.md) and [Vercel notes](../plan/vercel-demo.md). Detailed historical setup evidence remains available; it is not an active backlog of extra infrastructure work.

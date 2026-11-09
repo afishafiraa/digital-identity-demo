@@ -190,3 +190,4 @@ h3 { font-size: 13px; font-weight: 650; margin: 3px 0 0; }
 .presentation-result { margin: 22px 0; }
 .result-verified { border-color: #86aa43; background: #eff6e4; }
 .result-failed { border-color: #bf8a72; background: #fbf1e9; }
+ .reset-demo { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--line, #deded6); }

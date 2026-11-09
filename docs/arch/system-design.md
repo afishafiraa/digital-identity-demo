@@ -49,6 +49,8 @@ The current local development containers used about **1.06 GiB combined** in one
 
 ## Deployment later
 
+**2026-11-09 owner-directed presentation deployment:** [Vercel](https://digital-identity-demo.vercel.app) now serves the UI and proxies `/api/*` through a temporary tunnel to the existing Docker app. Durable state stays on the Docker volumes. The exact public origin governs secure cookies and mutations. This requires the owner's machine, Docker and tunnel to remain running; it is not the VPS release gate below. F9 retires the current session atomically and creates a separate empty wallet on the next explicit start; old data is retained privately. See [deployment notes](../plan/vercel-demo.md) and [F9 evidence](../workitem/F9-reset-current-demo-verification.md).
+
 Finish the basic walkthrough locally first. Then inspect the existing VPS, reuse its reverse proxy/HTTPS, and deploy the same small stack to one demo subdomain. Only required app/protocol routes become public. No Kubernetes, separate issuer/verifier portals, MPC, product backup/recovery, or portfolio landing page belongs in this build.
 
 See the [PRD](../spec/prd.md) for behavior, the [short delivery plan](../plan/demo-plan.md) for order, and [local development](../plan/local-development.md) for today's actual commands.

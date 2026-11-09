@@ -1,6 +1,6 @@
 # F9-reset-current-demo — Reset the current demo
 
-Updated: 2026-11-08. Status: Pending; product implementation and acceptance checks not run.
+Updated: 2026-11-09. Status: Implemented at the owner's explicit request after Vercel deployment; F9-AC01–F9-AC05 passed. F8 remains pending. See the [verification record](../../workitem/F9-reset-current-demo-verification.md).
 
 Source: [PRD](../prd.md), PRD sections 5–7 (F9), 9, and 10 checks 1, 6–7. Apply the shared rules in the [feature index](README.md).
 

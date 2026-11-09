@@ -125,6 +125,13 @@ export class SessionStore {
     const row = this.db.prepare('SELECT store_id, phase, wallet_id FROM wallet_bindings WHERE session_hash = ?').get(digest(token));
     return row ? decodeBinding(row) : null;
   }
+  reset(token: string): void {
+    if (!tokenPattern.test(token)) throw new AppError('SESSION_EXPIRED', 409);
+    // Retire access atomically. Keep old data for retention; never delete shared
+    // service state or reuse this identity for the next wallet.
+    const result = this.db.prepare('UPDATE sessions SET expires_at = 0 WHERE token_hash = ?').run(digest(token));
+    if (Number(result.changes) !== 1) throw new AppError('SESSION_EXPIRED', 409);
+  }
   allocateWallet(token: string): WalletBinding {
     this.db.exec('BEGIN IMMEDIATE');
     try {
