@@ -1,6 +1,6 @@
 # Vercel demo deployment
 
-Public URL: **https://digital-identity-demo.vercel.app**. GitHub: **https://github.com/afishafiraa/digital-idenity-demo**. Vercel project: `digital-identity-demo-afi` under `shafira-putri-anandas-projects`. The owner changed the production domain before the reset deployment; the backend now permits the exact updated origin.
+Public URL: **https://digital-identity-demo.vercel.app**. GitHub: **https://github.com/afishafiraa/digital-identity-demo**. The repository was renamed on 2026-11-10; the local Git remote uses `https://github.com/afishafiraa/digital-identity-demo.git`. Vercel project: `digital-identity-demo-afi` under `shafira-putri-anandas-projects`. The owner changed the production domain before the reset deployment; the backend now permits the exact updated origin.
 
 The owner requested Vercel for the 2026-11-09 presentation. Vercel serves the Next.js UI; `DEMO_BACKEND_URL` configures a before-files rewrite for `/api/*` to the existing Docker app through a temporary Cloudflare tunnel. Session coordination and walt.id wallet/key storage remain on the existing Docker volumes. No walt.id management port is exposed by the tunnel.
 
